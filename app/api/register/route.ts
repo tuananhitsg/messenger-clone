@@ -15,11 +15,10 @@ export async function POST(request: Request) {
     const hashedPassword = await bcrypt.hash(password, 10)
 
     const user = await db.user.create({
-      data: { email: email, name: name, hashedPassword },
+      data: { email, name, hashedPassword },
     })
 
     return NextResponse.json(user)
-    
   } catch (error: any) {
     return new NextResponse('Internal error', { status: 500 })
   }
